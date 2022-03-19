@@ -6,7 +6,7 @@ include_once './Authors.php';
   class Quote {
     // DB Stuff
     private $conn;
-    private static $TABLE = 'quotes';
+    private $table = 'quotes';
 
     // Properties
     public $id;
@@ -26,7 +26,7 @@ include_once './Authors.php';
       $query = 'SELECT
       id, quote, categoryId, authorId
       FROM
-      ' . $TABLE . '
+      ' . $this->table . '
       WHERE id = ?
       LIMIT 0,1';
     //   $query = 'SELECT
@@ -35,9 +35,9 @@ include_once './Authors.php';
     //     a.author,
     //     c.category
     //     FROM
-    //     ' . $TABLE . ' q' .
-    //     'JOIN ' . Category::$TABLE .'c on ' . ' c.id = q.categoryId ' .
-    //     'JOIN ' . Author::$TABLE . 'a on ' . ' a.id = q.authorId ' .
+    //     ' . $this->table . ' q' .
+    //     'JOIN ' . Category::$this->table .'c on ' . ' c.id = q.categoryId ' .
+    //     'JOIN ' . Author::$this->table . 'a on ' . ' a.id = q.authorId ' .
 
       // Prepare statement
       $stmt = $this->conn->prepare($query);
@@ -54,7 +54,7 @@ include_once './Authors.php';
     $query = 'SELECT
         id, quote, categoryId, authorId
         FROM
-        ' . $TABLE . '
+        ' . $this->table . '
         WHERE id = ?
         LIMIT 0,1';
     // $query = 'SELECT
@@ -63,9 +63,9 @@ include_once './Authors.php';
     //     a.author as author,
     //     c.category as category
     //       FROM
-    //     ' . $TABLE . ' q' .
-    //     'JOIN ' . Category::$TABLE .'c on ' . ' c.id = q.categoryId ' .
-    //     'JOIN ' . Author::$TABLE . 'a on ' . ' a.id = q.authorId 
+    //     ' . $this->table . ' q' .
+    //     'JOIN ' . Category::$this->table .'c on ' . ' c.id = q.categoryId ' .
+    //     'JOIN ' . Author::$this->table . 'a on ' . ' a.id = q.authorId 
     //   WHERE id = ?
     //   LIMIT 0,1';
 
@@ -91,7 +91,7 @@ include_once './Authors.php';
   public function create() {
     // Create Query
     $query = 'INSERT INTO ' .
-      $TABLE. '
+      $this->table. '
     SET
       quote = :quote,
       authorId = :authorId,
@@ -124,7 +124,7 @@ include_once './Authors.php';
   public function update() {
     // Create Query
     $query = 'UPDATE ' .
-      $TABLE. '
+      $this->table. '
     SET
       quote = :quote,
       authorId = :authorId,
@@ -158,7 +158,7 @@ include_once './Authors.php';
   // Delete Quote
   public function delete() {
     // Create query
-    $query = 'DELETE FROM ' . $TABLE. ' WHERE id = :id';
+    $query = 'DELETE FROM ' . $this->table. ' WHERE id = :id';
 
     // Prepare Statement
     $stmt = $this->conn->prepare($query);

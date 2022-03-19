@@ -2,7 +2,7 @@
   class Author {
     // DB Stuff
     private $conn;
-    public static $TABLE = 'authors';
+    private $table = 'authors';
 
     // Properties
     public $id;
@@ -38,7 +38,7 @@
           id,
           author
         FROM
-          ' . $TABLE. '
+          ' . $this->table. '
       WHERE id = ?
       LIMIT 0,1';
 
@@ -62,7 +62,7 @@
   public function create() {
     // Create Query
     $query = 'INSERT INTO ' .
-      $TABLE. '
+      $this->table. '
     SET
       author = :author';
 
@@ -90,7 +90,7 @@
   public function update() {
     // Create Query
     $query = 'UPDATE ' .
-      $TABLE. '
+      $this->table. '
     SET
       author = :author
       WHERE
@@ -121,7 +121,7 @@
   // Delete Author
   public function delete() {
     // Create query
-    $query = 'DELETE FROM ' . $TABLE. ' WHERE id = :id';
+    $query = 'DELETE FROM ' . $this->table. ' WHERE id = :id';
 
     // Prepare Statement
     $stmt = $this->conn->prepare($query);
