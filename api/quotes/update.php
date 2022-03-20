@@ -43,7 +43,7 @@
 
   // Update post
   if($quote->update()) {
-    if ($quotes->id) {
+    if ($quote->id) {
       echo json_encode(
         array(
           'id' => $quote->id,
