@@ -21,7 +21,7 @@
   $quote_arr;
   if ($quote->id === null) {
     $quote_arr = array(
-      'message' => "quoteId Not Found",
+      'message' => "No Quotes Found",
     );
   } else {
     $quote_arr = array(
