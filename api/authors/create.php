@@ -12,7 +12,10 @@
   // Create Author
   if($author->create()) {
     echo json_encode(
-      array('message' => 'Author Created')
+      array(
+        'id' => $author->id,
+        'author' => $author->author
+      )
     );
   } else {
     echo json_encode(

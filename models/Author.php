@@ -77,6 +77,7 @@
 
   // Execute query
   if($stmt->execute()) {
+    $this->id = intval($this->conn->lastInsertId());
     return true;
   }
 

@@ -71,12 +71,12 @@
 
   // Clean data
   $this->category = htmlspecialchars(strip_tags($this->category));
-
   // Bind data
   $stmt-> bindParam(':category', $this->category);
 
   // Execute query
   if($stmt->execute()) {
+    $this->id = intval($this->conn->lastInsertId());
     return true;
   }
 
