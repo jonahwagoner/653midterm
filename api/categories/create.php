@@ -7,6 +7,13 @@
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
+  if ($data->category == null) {
+    echo json_encode(
+      array('message' => 'Missing Required Parameters')
+    );
+    die();
+  }
+
   $category->category = $data->category;
 
   // Create Category
@@ -14,7 +21,7 @@
     echo json_encode(
         array(
             'id' => $category->id,
-            'author' => $category->category
+            'category' => $category->category
           )   
          );
   } else {
