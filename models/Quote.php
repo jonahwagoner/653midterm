@@ -1,8 +1,5 @@
 <?php
 
-include_once './Category.php';
-include_once './Authors.php';
-
   class Quote {
     // DB Stuff
     private $conn;
@@ -26,9 +23,7 @@ include_once './Authors.php';
       $query = 'SELECT
       id, quote, categoryId, authorId
       FROM
-      ' . $this->table . '
-      WHERE id = ?
-      LIMIT 0,1';
+      ' . $this->table;
     //   $query = 'SELECT
     //     q.id,
     //     q.quote,
@@ -111,6 +106,7 @@ include_once './Authors.php';
 
   // Execute query
   if($stmt->execute()) {
+    $this->id = $this->conn->lastInsertId();
     return true;
   }
 

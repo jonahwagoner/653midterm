@@ -7,15 +7,15 @@
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to UPDATE
-  $category->id = $data->id;
+  $quote->id = $data->id;
 
   // Delete post
-  if($category->delete()) {
+  if($quote->delete()) {
     echo json_encode(
-        array('id' => $category->id)
+      array('id' => $quote->id)
     );
   } else {
     echo json_encode(
-      array('message' => 'Category not deleted')
+      array('message' => 'No Quotes Found')
     );
   }
