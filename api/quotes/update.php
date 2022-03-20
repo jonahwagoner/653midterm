@@ -43,16 +43,21 @@
 
   // Update post
   if($quote->update()) {
-    echo json_encode(
-      array(
-        'id' => $quote->id,
-        'quote' => $quote->quote,
-        'authorId' => $quote->authorId,
-        'categoryId' => $quote->categoryId
-      )
-    );
+    if ($quotes->id) {
+      echo json_encode(
+        array(
+          'id' => $quote->id,
+          'quote' => $quote->quote,
+          'authorId' => $quote->authorId,
+          'categoryId' => $quote->categoryId
+        )
+      );
+    } else {
+      echo json_encode(
+        array('message' => 'No Quotes Found')
+      );    }
   } else {
     echo json_encode(
-      array('message' => 'No quotes found')
+      array('message' => 'Quotes not updated')
     );
   }

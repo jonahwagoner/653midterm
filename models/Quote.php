@@ -154,6 +154,9 @@
 
   // Execute query
   if($stmt->execute()) {
+    if ($stmt->rowCount() == 0) {
+        $this->id = null;
+    }
     return true;
   }
 
