@@ -1,5 +1,9 @@
 <?php 
 
+  // Get ID
+  $quote->categoryId = isset($_GET['categoryId']) ? $_GET['categoryId'] : null;
+  $quote->authorId = isset($_GET['authorId']) ? $_GET['authorId'] : null;
+  
   // Quote read query
   $result = $quote->read();
   

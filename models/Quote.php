@@ -19,23 +19,35 @@
 
     // Get quotes
     public function read() {
+        
+        $queryEnd = '';
+        if ($this->categoryId && $this->authorId) {
+            $queryEnd = ' WHERE categoryId = ? AND authorId = ?';
+        } else if ($this->categoryId) {
+            $queryEnd = ' WHERE categoryId = ?';
+        } else if ($this->authorId) {
+            $queryEnd = ' WHERE authorId = ?';
+        }
       // Create query
       $query = 'SELECT
       id, quote, categoryId, authorId
       FROM
-      ' . $this->table;
-    //   $query = 'SELECT
-    //     q.id,
-    //     q.quote,
-    //     a.author,
-    //     c.category
-    //     FROM
-    //     ' . $this->table . ' q' .
-    //     'JOIN ' . Category::$this->table .'c on ' . ' c.id = q.categoryId ' .
-    //     'JOIN ' . Author::$this->table . 'a on ' . ' a.id = q.authorId ' .
+      ' . $this->table . $queryEnd;
 
       // Prepare statement
       $stmt = $this->conn->prepare($query);
+
+      // Bind params
+      if ($this->categoryId && $this->authorId) {
+        $stmt->bindParam(1, $this->categoryId);
+        $stmt->bindParam(2, $this->authorId);
+    } else if ($this->categoryId) {
+        $stmt->bindParam(1, $this->categoryId);
+    } else if ($this->authorId) {
+        $stmt->bindParam(1, $this->authorId);
+    }
+
+
 
       // Execute query
       $stmt->execute();
